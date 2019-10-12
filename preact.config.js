@@ -1,6 +1,16 @@
-import { resolve } from "path";
+import path, { resolve } from "path";
+import { glob } from "glob";
+import PurgecssPlugin from "purgecss-webpack-plugin";
 
 export default function(config, env, helpers) {
+    config.plugins.push(
+        new PurgecssPlugin({
+            paths: glob.sync(`${path.join(__dirname, "src")}/**/*`, {
+                nodir: true
+            })
+        })
+    );
+
     // Switch css-loader for typings-for-css-modules-loader, which is a wrapper
     // that automatically generates .d.ts files for loaded CSS
     helpers.getLoadersByName(config, "css-loader").forEach(({ loader }) => {
