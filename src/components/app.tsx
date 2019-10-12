@@ -1,5 +1,5 @@
 import { Component, ComponentChild, h } from "preact";
-import { Router } from "preact-router";
+import { Route, Router } from "preact-router";
 
 import CriminalDetails from "./criminaldetails";
 import Header from "./header";
