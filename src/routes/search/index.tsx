@@ -1,7 +1,7 @@
 import { Fragment, h, VNode } from "preact";
 import { getCurrentUrl, RouterProps } from "preact-router";
-import SearchForm, { SearchData } from '../searchform';
-import SearchResults from '../searchresults';
+import SearchForm, { SearchData } from "../../components/searchform";
+import SearchResults from "../../components/searchresults";
 
 function getInitialState(): SearchData
 {
@@ -18,7 +18,7 @@ function getInitialState(): SearchData
     };
 }
 
-export default function SERP(props: RouterProps): VNode<any>
+export default function SearchRoute(props: RouterProps): VNode<any>
 {
     return (
         <Fragment>

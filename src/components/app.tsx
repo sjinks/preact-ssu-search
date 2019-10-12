@@ -1,15 +1,10 @@
 import { Component, ComponentChild, h } from "preact";
 import { Route, Router } from "preact-router";
 
-import CriminalDetails from "./criminaldetails";
+import RootRoute from "../routes/root";
+import SearchRoute from "../routes/search";
+import ViewRoute from "../routes/view";
 import Header from "./header";
-import SearchForm from './searchform';
-import SERP from './serp';
-
-if ((module as any).hot) {
-    // tslint:disable-next-line:no-var-requires
-    // require("preact/debug");
-}
 
 export default class App extends Component
 {
@@ -20,9 +15,9 @@ export default class App extends Component
                 <Header />
                 <div class="container">
                     <Router>
-                        <SearchForm path="/"/>
-                        <SERP path="/search"/>
-                        <CriminalDetails path="/view/:id" expanded={true} full={true}/>
+                        <Route path="/" component={RootRoute}/>
+                        <Route path="/search" component={SearchRoute}/>
+                        <Route path="/view/:id" component={ViewRoute}/>
                     </Router>
                 </div>
             </div>

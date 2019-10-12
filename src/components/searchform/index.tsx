@@ -1,5 +1,5 @@
-import { Component, ComponentChild, h, VNode } from "preact";
-import { getCurrentUrl, route, RouteProps, RouterProps } from 'preact-router';
+import { h, VNode } from "preact";
+import { getCurrentUrl, route, RouterProps } from 'preact-router';
 import { StateUpdater, useState } from "preact/hooks";
 
 export interface SearchData
