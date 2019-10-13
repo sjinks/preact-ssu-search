@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import Helmet from 'preact-helmet';
 import { useState, useEffect } from 'preact/hooks';
 import { formatSex, formatDDate, formatDOB } from '../../utils/format';
 
@@ -24,11 +25,12 @@ interface Criminal {
     url: string;
 }
 
-function renderLoading(): h.JSX.Element {
+function renderLoading(props: CriminalDetailsProps): h.JSX.Element {
     return (
         <div class="mt-2">
+            {props.full ? <Helmet title={`Розшук СБУ — виконується завантаження даних…`} /> : null}
             <div class="spinner-grow text-info" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">Завантаження…</span>
             </div>
             <div class="spinner-grow text-info" role="status" />
             <div class="spinner-grow text-info" role="status" />
@@ -36,18 +38,20 @@ function renderLoading(): h.JSX.Element {
     );
 }
 
-function renderError(): h.JSX.Element {
+function renderError(props: CriminalDetailsProps): h.JSX.Element {
     return (
         <div class="alert alert-danger mt-2" role="alert">
-            There was an error communicating with the server
+            {props.full ? <Helmet title={`Сталася прикра помилка`} /> : null}
+            Під час спілкування із сервером сталася помилка 😢
         </div>
     );
 }
 
-function renderNotFound(): h.JSX.Element {
+function renderNotFound(props: CriminalDetailsProps): h.JSX.Element {
     return (
         <div class="alert alert-warning mt-2" role="alert">
-            Не знайдено
+            {props.full ? <Helmet title={`Не знайдено`} /> : null}
+            Запис не знайдено.
         </div>
     );
 }
@@ -55,6 +59,16 @@ function renderNotFound(): h.JSX.Element {
 function renderFullDetails(c: Criminal, id: string): h.JSX.Element {
     return (
         <main>
+            <Helmet
+                title={`${c.surname} ${c.name} ${c.patronymic} — розшук СБУ`}
+                meta={[
+                    {
+                        name: 'description',
+                        content: `${c.surname} ${c.name} ${c.patronymic} (${formatDOB(c.dob)}), розшук по ${c.article}`,
+                    },
+                ]}
+            />
+
             <h1 class="text-danger">
                 {c.surname} {c.name} {c.patronymic}
             </h1>
@@ -181,13 +195,13 @@ export default function CriminalDetails(props: CriminalDetailsProps): h.JSX.Elem
         case 'initial':
             return null;
         case 'loading':
-            return renderLoading();
+            return renderLoading(props);
         case 'error':
-            return renderError();
+            return renderError(props);
     }
 
     if (!criminal) {
-        return renderNotFound();
+        return renderNotFound(props);
     }
 
     return props.full ? renderFullDetails(criminal, props.id) : renderBriefDetails(criminal, props.id);

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment, h } from 'preact';
 import { Link } from 'preact-router';
+import Helmet from 'preact-helmet';
 import { useEffect, useState } from 'preact/hooks';
 import ShowHideButton from '../showhidebutton';
 import { formatDOB } from '../../utils/format';
@@ -22,6 +23,13 @@ interface Criminal {
     url: string;
 }
 
+function buildSearchDescription(props: SearchResultsProps): string {
+    return [props.surname, props.name, props.patronymic]
+        .filter(Boolean)
+        .join(' ')
+        .trim();
+}
+
 function getSearchUrl(data: SearchResultsProps): string {
     const url = new URL('https://api.myrotvorets.center/ssu/v1/search');
     url.searchParams.append('s', data.surname);
@@ -33,7 +41,8 @@ function getSearchUrl(data: SearchResultsProps): string {
 function renderError(): h.JSX.Element {
     return (
         <div class="alert alert-danger" role="alert">
-            There was an error communicating with the server
+            <Helmet title={`Сталася прикра помилка`} />
+            Під час спілкування із сервером сталася помилка 😢
         </div>
     );
 }
@@ -41,7 +50,8 @@ function renderError(): h.JSX.Element {
 function renderNotFound(): h.JSX.Element {
     return (
         <div class="alert alert-warning" role="alert">
-            Не знайдено
+            <Helmet title={`Не знайдено`} />
+            За вашим запитом нічого не знайдено.
         </div>
     );
 }
@@ -49,8 +59,9 @@ function renderNotFound(): h.JSX.Element {
 function renderLoading(): h.JSX.Element {
     return (
         <Fragment>
+            <Helmet title={`Триває пошук по базі даних…`} />
             <div class="spinner-grow text-info" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">Завантаження…</span>
             </div>
             <div class="spinner-grow text-info" role="status" />
             <div class="spinner-grow text-info" role="status" />
@@ -99,6 +110,15 @@ export default function SearchResults(props: SearchResultsProps): h.JSX.Element 
 
     return (
         <ul class="list-unstyled">
+            <Helmet
+                title="Результати пошуку по базі СБУ"
+                meta={[
+                    {
+                        name: 'description',
+                        content: `Результати пошуку за запитом «${buildSearchDescription(props)}»`,
+                    },
+                ]}
+            />
             {criminals.map(
                 (c: Criminal): h.JSX.Element => (
                     <li class="media my-4" key={c.id}>

@@ -38,6 +38,7 @@
     "bootstrap": "^4.3.1",
     "preact": "^10.0.0",
     "preact-compat": "^3.18.4",
+    "preact-helmet": "^4.0.0-alpha-3",
     "preact-render-to-string": "^5.0.6",
     "preact-router": "^3.0.1"
   },
