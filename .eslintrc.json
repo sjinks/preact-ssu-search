@@ -1,0 +1,23 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "project": ["./tsconfig.json"],
+    "createDefaultProgram": true
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "standard-preact"
+  ],
+  "rules": {
+    "react/jsx-indent": [2, 4],
+    "jsx-quotes": ["error", "prefer-double"],
+    "react/jsx-indent-props": [2, 4]
+  }
+}

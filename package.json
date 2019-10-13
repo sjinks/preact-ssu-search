@@ -10,18 +10,17 @@
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
-    "lint": "tslint --project src"
+    "lint": "eslint ."
   },
-  "eslintConfig": {
-    "extends": "eslint-config-aerian"
-  },
-  "eslintIgnore": [
-    "build/*"
-  ],
   "devDependencies": {
     "@types/webpack-env": "^1.13.9",
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
     "css-loader": "^1.0.1",
-    "eslint-config-aerian": "^1.0.5",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-config-standard-preact": "^1.1.6",
+    "eslint-plugin-prettier": "^3.1.1",
     "glob": "^7.1.4",
     "identity-obj-proxy": "^3.0.0",
     "node-sass": "^4.12.0",
@@ -32,11 +31,6 @@
     "purgecss-webpack-plugin": "^1.6.0",
     "sass-loader": "^7.3.1",
     "ts-loader": "^6.2.0",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.17.0",
-    "tslint-consistent-codestyle": "^1.14.1",
-    "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^4.1.0",
     "typescript": "^3.6.4",
     "typings-for-css-modules-loader": "^1.7.0"
   },
@@ -47,11 +41,6 @@
     "preact-render-to-string": "^5.0.6",
     "preact-router": "^3.0.1"
   },
-  "peerDependencies": {
-    "prettier": ">1.0.0",
-    "tslint": ">5.0.0"
-  },
-  "description": "## CLI Commands *   `npm install`: Installs dependencies",
   "main": "preact.config.js",
   "keywords": [],
   "author": "Volodymyr Kolesnykov <volodymyr@wildwolf.name> (https://wildwolf.name/)",
