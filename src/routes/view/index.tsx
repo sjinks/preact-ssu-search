@@ -1,10 +1,7 @@
-import { h, VNode } from "preact";
-import { RouterProps } from "preact-router";
-import CriminalDetails from "../../components/criminaldetails";
+import { h } from 'preact';
+import { RouterProps } from 'preact-router';
+import CriminalDetails from '../../components/criminaldetails';
 
-export default function ViewRoute(props: RouterProps): VNode<any>
-{
-    return (
-        <CriminalDetails {...props} expanded={true} full={true}/>
-    );
+export default function ViewRoute(props: RouterProps & { id: string }): h.JSX.Element {
+    return <CriminalDetails {...props} expanded full />;
 }

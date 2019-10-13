@@ -1,26 +1,14 @@
-import { h, VNode } from "preact";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { h, VNode } from 'preact';
 import { getCurrentUrl, route, RouterProps } from 'preact-router';
-import { StateUpdater, useState } from "preact/hooks";
+import { StateUpdater, useState } from 'preact/hooks';
 
-export interface SearchData
-{
-    sur_name: string;
-    name: string;
-    name_second: string;
-    male: string;
-    date_birth_from: string;
-    date_birth_to: string;
-    date_from: string;
-    date_to: string;
-}
-
-function clearForm(): void
-{
+function clearForm(): void {
     route('/');
 }
 
-export default function SearchForm(props: RouterProps): VNode<any> | null
-{
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function SearchForm(props: RouterProps): VNode<any> | null {
     const url = new URL((location.origin || 'https://example.com') + getCurrentUrl());
     const [surname, setSurname] = useState(url.searchParams.get('surname') || '');
     const [name, setName] = useState(url.searchParams.get('name') || '');
@@ -34,7 +22,7 @@ export default function SearchForm(props: RouterProps): VNode<any> | null
     const map: Record<string, StateUpdater<string>> = {
         surname: setSurname,
         name: setName,
-        patronymic: setPatronymic
+        patronymic: setPatronymic,
     };
 
     const onChange = (e: Event): void => {
@@ -47,24 +35,52 @@ export default function SearchForm(props: RouterProps): VNode<any> | null
         <form onSubmit={onSubmit} class="mb-4">
             <div class="form-row align-items-center mb-2">
                 <div class="col-auto">
-                    <label for="surname" class="col-form-label col-form-label-sm">Прізвище</label>
-                    <input type="text" id="surname" class="form-control form-control-sm" value={surname} onChange={onChange}/>
+                    <label for="surname" class="col-form-label col-form-label-sm">
+                        Прізвище
+                    </label>
+                    <input
+                        type="text"
+                        id="surname"
+                        class="form-control form-control-sm"
+                        value={surname}
+                        onChange={onChange}
+                    />
                 </div>
                 <div class="col-auto">
-                    <label for="name" class="col-form-label col-form-label-sm">Ім'я</label>
-                    <input type="text" id="name" class="form-control form-control-sm" value={name} onChange={onChange}/>
+                    <label for="name" class="col-form-label col-form-label-sm">
+                        Ім'я
+                    </label>
+                    <input
+                        type="text"
+                        id="name"
+                        class="form-control form-control-sm"
+                        value={name}
+                        onChange={onChange}
+                    />
                 </div>
                 <div class="col-auto">
-                    <label for="patronymic" class="col-form-label col-form-label-sm">По батькові</label>
-                    <input type="text" id="patronymic" class="form-control form-control-sm" value={patronymic} onChange={onChange}/>
+                    <label for="patronymic" class="col-form-label col-form-label-sm">
+                        По батькові
+                    </label>
+                    <input
+                        type="text"
+                        id="patronymic"
+                        class="form-control form-control-sm"
+                        value={patronymic}
+                        onChange={onChange}
+                    />
                 </div>
             </div>
             <div class="form-row align-items-left">
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary btn-sm">Шукати</button>
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        Шукати
+                    </button>
                 </div>
-                <div class="col-auto">    
-                    <button type="button" class="btn btn-danger btn-sm" onClick={clearForm}>Очистити</button>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-danger btn-sm" onClick={clearForm}>
+                        Очистити
+                    </button>
                 </div>
             </div>
         </form>

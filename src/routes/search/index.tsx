@@ -1,29 +1,23 @@
-import { Fragment, h, VNode } from "preact";
-import { getCurrentUrl, RouterProps } from "preact-router";
-import SearchForm, { SearchData } from "../../components/searchform";
-import SearchResults from "../../components/searchresults";
+import { Fragment, h } from 'preact';
+import { getCurrentUrl, RouterProps } from 'preact-router';
+import SearchForm from '../../components/searchform';
+import SearchResults, { SearchResultsProps } from '../../components/searchresults';
 
-function getInitialState(): SearchData
-{
+function getInitialState(): SearchResultsProps {
     const url = new URL(location.origin + getCurrentUrl());
     return {
-        sur_name: url.searchParams.get('surname') || '',
+        surname: url.searchParams.get('surname') || '',
         name: url.searchParams.get('name') || '',
-        name_second: url.searchParams.get('patronymic') || '',
-        male: '',
-        date_birth_from: '0000-00-00',
-        date_birth_to: '2099-12-31',
-        date_from: '0000-00-00',
-        date_to: '2099-12-31'
+        patronymic: url.searchParams.get('patronymic') || '',
     };
 }
 
-export default function SearchRoute(props: RouterProps): VNode<any>
-{
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function SearchRoute(props: RouterProps): h.JSX.Element {
     return (
         <Fragment>
-            <SearchForm/>
-            <SearchResults data={getInitialState()}/>
+            <SearchForm />
+            <SearchResults {...getInitialState()} />
         </Fragment>
     );
 }
