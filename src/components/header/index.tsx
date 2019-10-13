@@ -1,20 +1,19 @@
-import { h, VNode } from "preact";
-// tslint:disable-next-line: no-var-requires
+import { h } from 'preact';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const logoPNG = require('./logo-64.png');
-// tslint:disable-next-line: no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const logoWebP = require('./logo-64.webp');
 
-export default function Header(): VNode<any>
-{
+export default function Header(): h.JSX.Element {
     return (
         <header class="mb-4">
             <nav class="navbar navbar-dark bg-primary">
                 <h1>
                     <a class="navbar-brand" href="/">
                         <picture>
-                            <source type="image/webp" srcset={logoWebP}/>
-                            <source type="image/png" srcset={logoPNG}/>
-                            <img src={logoPNG} alt="" class="mr-2"/>
+                            <source type="image/webp" srcset={logoWebP} />
+                            <source type="image/png" srcset={logoPNG} />
+                            <img src={logoPNG} alt="" class="mr-2" />
                         </picture>
                         Розшук СБУ
                     </a>
