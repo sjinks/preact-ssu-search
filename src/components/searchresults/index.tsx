@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ComponentChild, Fragment, h, VNode } from 'preact';
+import { Fragment, h } from 'preact';
 import { Link } from 'preact-router';
 import { useEffect, useState } from 'preact/hooks';
 import ShowHideButton from '../showhidebutton';
+import { formatDOB } from '../../utils/format';
 
 export interface SearchResultsProps {
     surname: string;
@@ -29,7 +30,7 @@ function getSearchUrl(data: SearchResultsProps): string {
     return url.toString();
 }
 
-function renderError(): VNode<any> {
+function renderError(): h.JSX.Element {
     return (
         <div class="alert alert-danger" role="alert">
             There was an error communicating with the server
@@ -37,7 +38,7 @@ function renderError(): VNode<any> {
     );
 }
 
-function renderNotFound(): VNode<any> {
+function renderNotFound(): h.JSX.Element {
     return (
         <div class="alert alert-warning" role="alert">
             Не знайдено
@@ -45,7 +46,7 @@ function renderNotFound(): VNode<any> {
     );
 }
 
-function renderLoading(): VNode<any> {
+function renderLoading(): h.JSX.Element {
     return (
         <Fragment>
             <div class="spinner-grow text-info" role="status">
@@ -57,7 +58,7 @@ function renderLoading(): VNode<any> {
     );
 }
 
-export default function SearchResults(props: SearchResultsProps): VNode<any> | null {
+export default function SearchResults(props: SearchResultsProps): h.JSX.Element | null {
     const [state, setState] = useState<'loading' | 'error' | 'done' | 'not-found'>('done');
     const [criminals, setCriminals] = useState<Criminal[]>([]);
 
@@ -99,7 +100,7 @@ export default function SearchResults(props: SearchResultsProps): VNode<any> | n
     return (
         <ul class="list-unstyled">
             {criminals.map(
-                (c: Criminal): ComponentChild => (
+                (c: Criminal): h.JSX.Element => (
                     <li class="media my-4" key={c.id}>
                         <Link href={`/view/${c.id}`}>
                             <img src={c.thumbnail} alt="Світлина" class="mr-3 img-thumbnail" />
@@ -116,7 +117,7 @@ export default function SearchResults(props: SearchResultsProps): VNode<any> | n
                                     <strong>По батькові:</strong> {c.patronymic}
                                 </li>
                                 <li class="list-group-item py-1 px-2">
-                                    <strong>Дата народження:</strong> {c.dob}
+                                    <strong>Дата народження:</strong> {formatDOB(c.dob)}
                                 </li>
                             </ul>
                             <ShowHideButton id={c.id} />

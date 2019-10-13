@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
+import { formatSex, formatDDate, formatDOB } from '../../utils/format';
 
 export interface CriminalDetailsProps {
     id: string;
@@ -73,13 +74,13 @@ function renderFullDetails(c: Criminal, id: string): h.JSX.Element {
                             <strong>По батькові:</strong> {c.patronymic}
                         </li>
                         <li class="list-group-item py-1 px-2">
-                            <strong>Дата народження:</strong> {c.dob}
+                            <strong>Дата народження:</strong> {formatDOB(c.dob)}
                         </li>
                         <li class="list-group-item py-1 px-2">
-                            <strong>Стать:</strong> {c.sex}
+                            <strong>Стать:</strong> {formatSex(c.sex)}
                         </li>
                         <li class="list-group-item py-1 px-2">
-                            <strong>Дата зникнення:</strong> {c.ddate}
+                            <strong>Дата зникнення:</strong> {formatDDate(c.ddate)}
                         </li>
                         <li class="list-group-item py-1 px-2">
                             <strong>Місце зникнення:</strong> {c.dplace}
@@ -111,10 +112,10 @@ function renderBriefDetails(c: Criminal, id: string): h.JSX.Element {
     return (
         <ul class="list-group list-group-flush">
             <li class="list-group-item py-1 px-2">
-                <strong>Стать:</strong> {c.sex}
+                <strong>Стать:</strong> {formatSex(c.sex)}
             </li>
             <li class="list-group-item py-1 px-2">
-                <strong>Дата зникнення:</strong> {c.ddate}
+                <strong>Дата зникнення:</strong> {formatDDate(c.ddate)}
             </li>
             <li class="list-group-item py-1 px-2">
                 <strong>Місце зникнення:</strong> {c.dplace}
